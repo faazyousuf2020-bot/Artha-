@@ -1,0 +1,15 @@
+{
+  "appId": "com.faazdevlabs.artha",
+  "appName": "Artha",
+  "webDir": "docs",
+  "backgroundColor": "#030303",
+  "android": {
+    "backgroundColor": "#030303",
+    "allowMixedContent": false,
+    "webContentsDebuggingEnabled": false
+  },
+  "plugins": {
+    "SystemBars": { "insetsHandling": "css", "style": "DARK" },
+    "StatusBar": { "style": "DARK", "backgroundColor": "#030303", "overlaysWebView": false }
+  }
+}

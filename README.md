@@ -1,58 +1,63 @@
 # Artha Finance OS
 
-**Your money, understood.** A personal finance operating system by Faaz Dev Labs.
+**Your money, understood.** A personal finance operating system by Faaz Dev Labs, for Android and the web.
 
-Artha brings net worth, cash flow, GST, investments, personal accounting, analytics and a financial assistant into one dark, fast command center.
+## Install on Android
+
+1. Open the repo's **Releases** page and download the latest `Artha-v1.1.x.apk`.
+2. Open it on your phone and allow "Install unknown apps" for your browser or file manager when asked.
+3. New versions install over the old one and keep your data.
+
+A new APK is built automatically every time code is pushed to `main` (see **Actions**).
+
+## First launch
+
+Choose one:
+- **Start with my own data** — empty ledger. Set your account balances (Money → Accounts), add investments, assets and loans, then log entries.
+- **Explore with demo data** — six months of sample entries. Clear it from Command Center any time.
+- **Restore a backup** — import an Artha backup file.
 
 ## What's inside
 
 | Section | What it does |
 |---|---|
-| Command Center | Net worth, cash, investments, side income, GST, financial radar, insights, quick actions, spending chart |
-| Money | Transaction ledger with filters, side-gig tracker, recurring payments, accounts, categories |
+| Command Center | Net worth, cash, investments, side income, GST, financial radar, insights, alerts, quick actions, spending chart |
+| Money | Ledger with search and filters, edit/delete entries, side-gig tracker, recurring payments, accounts |
 | Tax Intelligence | GST estimates (CGST / SGST / IGST), slabs, input-tax-credit status, editable tax ledger |
-| Portfolio | Holdings, allocation, gain/loss, price refresh (demo feed) |
+| Portfolio | Holdings with buy, top-up, price updates and sales (realised gain), allocation, wealth assets |
 | Personal Accounting | Balance sheet, P&L, cash-flow statement, asset and liability registers, double-entry journal |
 | Analytics | Category drill-down, trends, transparent financial-health score |
 | Artha AI | Answers questions from your ledger and links to the records behind each answer |
 
-Every number is calculated in code from the ledger. The assistant never invents figures; it only routes your question to the right calculation.
-
-## Run it
-
-No build step and no install. Either:
-
-- open `index.html` in a browser, or
-- serve the folder: `python3 -m http.server 8080` then visit http://localhost:8080
-
-## Put it online (GitHub Pages)
-
-1. Repo **Settings → Pages**
-2. Source: **Deploy from a branch**, branch **main**, folder **/ (root)**
-3. Open the URL GitHub gives you. On Android Chrome, use **⋮ → Add to Home screen** to install it like an app.
+Every figure is calculated in code from your own entries. The assistant never makes up numbers; it routes your question to the right calculation.
 
 ## Your data
 
-- Entries are saved in the browser on the device you use (localStorage).
-- Use **Export backup** on the Command Center to download a JSON file, and **Import backup** to restore it on another device.
-- **Reset to demo data** erases your entries and reloads the sample ledger.
+- Stored privately on the device. Nothing is sent anywhere.
+- **Export backup** (Command Center → Your data) shares a `.json` file you can save to Drive, Files or WhatsApp. **Import backup** restores it on any device.
+- GST figures are estimates from categories. Confirm with invoices and a qualified accountant before filing or claiming credit.
 
 ## Project layout
 
 ```
-index.html            app shell
-css/styles.css        design tokens and styles
-js/format.js          formatting helpers and icons
-js/data.js            data model, demo ledger, saving/loading, derived totals
-js/charts.js          SVG charts and shared UI pieces
-js/views.js           the seven screens
-js/assistant.js       question answering from the ledger
-js/app.js             overlays, quick add, search, navigation, events
-sw.js                 offline support
-manifest.webmanifest  install-as-app settings
+docs/                   the app (HTML, CSS, JS, fonts) — also works as a website
+  js/format.js          dates, number formatting, icons
+  js/data.js            data model, demo ledger, saving, totals, insights, alerts
+  js/charts.js          charts and shared UI pieces
+  js/views.js           the screens
+  js/assistant.js       question answering from the ledger
+  js/app.js             forms, editing, search, navigation
+  js/native.js          Android back button, status bar, backup sharing
+android/                Android project (Capacitor)
+.github/workflows/      builds the APK and publishes a release
 ```
 
-## Notes
+## Build it yourself
 
-- GST figures are estimates. Real filings need actual invoice data, current GST notifications and review by a qualified accountant.
-- Market prices come from a demo feed. A live price provider can be plugged in later without changing valuation logic.
+```
+npm ci
+npx cap sync android
+cd android && ./gradlew assembleRelease
+```
+
+Run the web version locally: `npx http-server docs` and open http://localhost:8080.
