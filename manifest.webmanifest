@@ -1,0 +1,13 @@
+{
+  "name": "Artha Finance OS",
+  "short_name": "Artha",
+  "description": "Your money, understood.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#030303",
+  "theme_color": "#030303",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
